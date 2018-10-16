@@ -95,3 +95,32 @@ Now let's talk about dependencies:
 **Dependencies** is a **method** which takes a "runnable" block of code (a closure). Inside that block we've calld the **testCompile**
 method with **group: 'junit'** etc as an argument (the **group, name, version** section is actually shorthand for a grooy **map**,
 essentially a list of key-value pairs.
+
+
+# build.gradle file
+
+Now that we've set up our gradle build, we'll add the JDA as a dependency.
+
+# Main Class
+
+We'll then add a Main class where we'll create a psvm and then create our JDA instance using the JDABuilder class. Before we go any further we would need a discord bot token which we've
+obtained from the discord applications page. We'll add that token to the JDABuilder using the **setToken(String)** method.
+
+Now its finally time to login to discord with our bot! To build the JDA instance and connect to discord, simply call the method **JDABuilder.buildAsync()**.
+You'll notice that the line will be red, reason being that it throws out a Login Exception. Hence, we'll just declare the main method as **throws LoginException**.
+
+In the console, it seems that the first 6 lines are errors because we don't have any slf4j implementations on our project, but for now we can ignore those.
+The next 3 lines tells us JDA has successfully logged into Discord and is ready to receive messages. Right now, our bot doesn't do anything at the moments.
+
+# ListenerAdapter
+
+For our bot to do something, we need to add a listener to our JDA instance. For now, let's have our main class extend **ListenerAdapter** and override the **onMessageReceived** method.
+
+Now, let's make the bot reply with "Pong!" if the message is "!ping". To finalize, we register a new instance of our main class in the JDABuilder.
+
+# System Test
+
+When we re-run our bot, it'll respond with "pong" when we run "!ping".
+
+After finishing the bot build, we need to export it into a runnable jar file. To do so, we'll use the gradle shadow plugin.
+To export the project, we'll open the gradle tab on the right and click on **Tasks -> shadow -> shadowJar**. 
