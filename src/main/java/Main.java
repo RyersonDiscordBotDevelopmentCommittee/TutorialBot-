@@ -25,7 +25,7 @@ public class Main extends ListenerAdapter {
         if(event.getMessage().getContentRaw().equals("!ping")) {
             // remember to call queue()!
             // otherwise our message will never be sent
-            event.getChannel().sendMessage( text: "Pong!" ).queue();
+            event.getChannel().sendMessage(text: "Pong!").queue();
         }
     }
 }
